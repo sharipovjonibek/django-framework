@@ -1,0 +1,2 @@
+# djanog
+ for django
