@@ -1,0 +1,22 @@
+{%extends 'base.html'%}
+{%block title%} Home Page{% endblock title%}
+{%block content%}
+{%if user.is_authenticated%}
+<div class="alert alert-success text-center">
+    <h4>{{user.username | title}},Welcome back!</h4>
+    <p>You are logged in. Start exploring posts now!</p>
+    <a href="{% url 'article_list'%}" class="btn btn-success">Go to Posts</a>
+</div>
+{%else%}
+<div class="alert alert-info text-center">
+    <h4>Welcome to MathXpert!</h4>
+    <p>To explore all features, please register first. Already have an account? Log in below.</p>
+    <a href="{%url 'signup'%}" class="btn btn-primary">Register Now</a>
+    <a href="{% url 'login'%}" class="btn btn-outline-dark">Log In</a>
+</div>
+{%endif%}
+{%endblock content%}
+<!-- <main class="container text-center mt-3">
+        <main class="container text-center mt-3">
+
+    </main> -->

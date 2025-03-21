@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <div class="card mx-auto shadow-sm" style="max-width: 800px;">
+        {% if object.photo %}
+            <img class="card-img-top img-fluid" src="{{ object.photo.url }}" alt="{{ object.title }}" 
+                 style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+        {% endif %}
+
+        <div class="card-body">
+            <h1 class="card-title text-center">{{ object.title }}</h1>
+            <h6 class="card-subtitle mb-3 text-muted text-center">
+                <strong>By </strong> {{ object.author| title}} | {{ object.date | safe}}
+            </h6>
+
+            <p class="card-text" style="font-size: 18px; line-height: 1.6;">
+                {{ object.body | safe }}
+            </p>
+
+            <div class="d-flex justify-content-center mt-4">
+                <a href="{% url 'article_edit' object.pk %}" class="btn btn-warning me-2">✏️ Tahrirlash</a>
+                <a href="{% url 'article_delete' object.pk %}" class="btn btn-danger me-2">🗑 O'chirish</a>
+                <a href="{% url 'article_list' %}" class="btn btn-primary">📜 Barcha postlar</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-header">Izohlar</div>
+    {% for comment in article.comments.all %}
+    <div class="card-body">
+        <blockquote class="blockquote mb-0">
+            <p>{{ comment }}</p>
+            <footer class="blockquote-footer">{{comment.author}}</footer>
+        </blockquote>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock content %}
+
